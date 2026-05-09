@@ -20,7 +20,7 @@ subG = G_completo.subgraph(nodos_a_dibujar)
 plt.figure(figsize=(12, 10))
 pos = nx.spring_layout(subG, k=1.2, seed=42)
 
-# Dibujamos con estilo profesional
+# Dibujamos
 nx.draw_networkx_nodes(subG, pos, node_size=1500, node_color='#58D68D', alpha=0.9)
 nx.draw_networkx_edges(subG, pos, width=1.5, edge_color='gray', arrows=True, arrowsize=15)
 nx.draw_networkx_labels(subG, pos, font_size=10, font_weight='bold')
