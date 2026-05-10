@@ -1,7 +1,6 @@
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
-import random
 
 df = pd.read_csv("grafo_biologico_1500.csv")
 
@@ -9,74 +8,46 @@ G = nx.Graph()
 
 for i in range(len(df)):
 
-    proteina1 = df.iloc[i]["protein1"]
-    proteina2 = df.iloc[i]["protein2"]
+    p1 = df.iloc[i]["protein1"]
+    p2 = df.iloc[i]["protein2"]
 
     peso = df.iloc[i]["weight"]
 
-    G.add_edge(
-        proteina1,
-        proteina2,
-        weight=peso
-    )
+    G.add_edge(p1, p2, weight=peso)
 
-proteina_inicio = random.choice(
-    list(G.nodes())
-)
+top_nodos = sorted(
+    G.degree,
+    key=lambda x: x[1],
+    reverse=True
+)[:25]
 
-visitados = []
-pila = [proteina_inicio]
+top_nodos = [n for n, d in top_nodos]
 
-while pila:
+subG = G.subgraph(top_nodos)
 
-    nodo = pila.pop()
+plt.figure(figsize=(14,12))
 
-    if nodo not in visitados:
-
-        visitados.append(nodo)
-
-        for vecino in G[nodo]:
-
-            if vecino not in visitados:
-
-                pila.append(vecino)
-
-sub_nodos = visitados[:25]
-
-subG = G.subgraph(sub_nodos)
-
-plt.figure(figsize=(14, 12))
-
-pos = nx.spring_layout(
-    subG,
-    seed=42
-)
+pos = nx.spring_layout(subG, seed=42)
 
 nx.draw_networkx_nodes(
     subG,
     pos,
-    node_size=1200,
-    alpha=0.9
+    node_size=1500
 )
 
 nx.draw_networkx_edges(
     subG,
     pos,
-    width=2,
-    alpha=0.5
+    width=2
 )
 
 nx.draw_networkx_labels(
     subG,
     pos,
-    font_size=9,
-    font_weight="bold"
+    font_size=9
 )
 
-plt.title(
-    f"Subgrafo DFS desde {proteina_inicio}",
-    fontsize=16
-)
+plt.title("Subgrafo de Proteínas Altamente Conectadas")
 
 plt.axis("off")
 
