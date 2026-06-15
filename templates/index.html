@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioNet Analyzer — Redes Biológicas NIH</title>
+
+  <!-- Cytoscape.js: visualización de grafos -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar">
+
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M12 2c4 0 8 2 8 6s-4 4-8 4-8 0-8 4 4 6 8 6"/>
+          <path d="M12 2C8 2 4 4 4 8s4 4 8 4 8 0 8 4-4 6-8 6"/>
+        </svg>
+      </div>
+      <div>
+        <p class="brand-title">BioNet Analyzer</p>
+        <p class="brand-sub">Proteínas · NIH</p>
+      </div>
+    </div>
+
+    <p class="sidebar-label">Algoritmos</p>
+
+    <nav class="algo-list">
+      <button class="algo-btn active" data-algo="dyv" onclick="cargarAlgoritmo('dyv', this)">
+        <span class="algo-dot dot-teal"></span>
+        <span class="algo-info">
+          <span class="algo-name">Divide y Vencerás</span>
+          <span class="algo-meta">Interacción máxima · O(n log n)</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="dfs" onclick="cargarAlgoritmo('dfs', this)">
+        <span class="algo-dot dot-purple"></span>
+        <span class="algo-info">
+          <span class="algo-name">DFS</span>
+          <span class="algo-meta">Recorrido profundidad · O(V+E)</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="scc" onclick="cargarAlgoritmo('scc', this)">
+        <span class="algo-dot dot-teal"></span>
+        <span class="algo-info">
+          <span class="algo-name">SCC — Tarjan</span>
+          <span class="algo-meta">Componentes conexas · O(V+E)</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="backtracking" onclick="cargarAlgoritmo('backtracking', this)">
+        <span class="algo-dot dot-coral"></span>
+        <span class="algo-info">
+          <span class="algo-name">Backtracking</span>
+          <span class="algo-meta">Alineamiento RFC2/RFC4</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="fuerza_bruta" onclick="cargarAlgoritmo('fuerza_bruta', this)">
+        <span class="algo-dot dot-amber"></span>
+        <span class="algo-info">
+          <span class="algo-name">Fuerza Bruta</span>
+          <span class="algo-meta">Similitud proteínas · O(n²)</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="ufsd" onclick="cargarAlgoritmo('ufsd', this)">
+        <span class="algo-dot dot-purple"></span>
+        <span class="algo-info">
+          <span class="algo-name">UFSD</span>
+          <span class="algo-meta">Union-Find · O(α·n)</span>
+        </span>
+      </button>
+    </nav>
+
+    <p class="sidebar-label">Más algoritmos</p>
+
+    <nav class="algo-list">
+      <button class="algo-btn" data-algo="mst" onclick="cargarAlgoritmo('mst', this)">
+        <span class="algo-dot dot-teal"></span>
+        <span class="algo-info">
+          <span class="algo-name">MST — Kruskal</span>
+          <span class="algo-meta">Evolución mínima · O(E log E)</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="flujo_maximo" onclick="cargarAlgoritmo('flujo_maximo', this)">
+        <span class="algo-dot dot-purple"></span>
+        <span class="algo-info">
+          <span class="algo-name">Flujo Máximo</span>
+          <span class="algo-meta">Rutas metabólicas · Ford-Fulkerson</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="voraz" onclick="cargarAlgoritmo('voraz', this)">
+        <span class="algo-dot dot-amber"></span>
+        <span class="algo-info">
+          <span class="algo-name">Voraz</span>
+          <span class="algo-meta">Alineamiento heurístico · O(n)</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="dp" onclick="cargarAlgoritmo('dp', this)">
+        <span class="algo-dot dot-teal"></span>
+        <span class="algo-info">
+          <span class="algo-name">DP — Needleman-Wunsch</span>
+          <span class="algo-meta">Alineamiento óptimo · O(n·m)</span>
+        </span>
+      </button>
+
+      <button class="algo-btn" data-algo="dp_en_grafo" onclick="cargarAlgoritmo('dp_en_grafo', this)">
+        <span class="algo-dot dot-purple"></span>
+        <span class="algo-info">
+          <span class="algo-name">DP en Grafos</span>
+          <span class="algo-meta">Camino óptimo · Bellman-Ford</span>
+        </span>
+      </button>
+
+    <!-- Info del resultado -->
+    <div class="result-box" id="result-box">
+      <p class="result-title" id="result-title">Selecciona un algoritmo</p>
+      <div class="result-stats" id="result-stats">
+        <p class="result-hint">Haz clic en cualquier algoritmo para ejecutarlo y visualizar el grafo.</p>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main">
+
+    <!-- Header del grafo -->
+    <div class="graph-header">
+      <div class="graph-title-row">
+        <h1 class="graph-title" id="graph-title">Análisis de Redes Biológicas</h1>
+        <div class="graph-badges" id="graph-badges">
+          <span class="badge badge-neutral">1,500 proteínas</span>
+          <span class="badge badge-neutral">Dataset NIH</span>
+        </div>
+      </div>
+      <p class="graph-desc" id="graph-desc">
+        Selecciona un algoritmo del panel izquierdo para ejecutarlo y visualizar el grafo de interacciones.
+      </p>
+    </div>
+
+    <!-- Canvas del grafo -->
+    <div class="graph-wrap">
+      <div id="cy"></div>
+
+      <!-- Estado de carga -->
+      <div class="graph-overlay" id="graph-overlay">
+        <div class="overlay-content">
+          <div class="spinner"></div>
+          <p id="overlay-msg">Ejecutando algoritmo…</p>
+        </div>
+      </div>
+
+      <!-- Estado vacío inicial -->
+      <div class="graph-empty" id="graph-empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.3">
+          <circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/>
+          <circle cx="19" cy="19" r="2"/>
+          <line x1="12" y1="7" x2="5" y2="17"/>
+          <line x1="12" y1="7" x2="19" y2="17"/>
+          <line x1="7" y1="19" x2="17" y2="19"/>
+        </svg>
+        <p>Elige un algoritmo para visualizar el grafo</p>
+      </div>
+    </div>
+
+    <!-- Controles del grafo -->
+    <div class="graph-controls" id="graph-controls" style="display:none">
+      <button class="ctrl-btn" onclick="cy.fit()" title="Ajustar vista">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+        </svg>
+        Ajustar
+      </button>
+      <button class="ctrl-btn" onclick="cy.zoom(cy.zoom()*1.2)" title="Acercar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+        Acercar
+      </button>
+      <button class="ctrl-btn" onclick="cy.zoom(cy.zoom()*0.8)" title="Alejar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+        Alejar
+      </button>
+      <span class="ctrl-sep"></span>
+      <span class="ctrl-info" id="ctrl-info">— nodos · — aristas</span>
+    </div>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
