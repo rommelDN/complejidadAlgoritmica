@@ -1,0 +1,502 @@
+/* ==========================================
+   ANÁLISIS DE REDES BIOLÓGICAS — v2
+   Interfaz orientada a preguntas de investigación,
+   no a algoritmos. Misma paleta de laboratorio,
+   pero estructura completamente reorganizada.
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-base: #0E1410;
+  --bg-panel: #172019;
+  --bg-panel-raised: #1D2A22;
+  --border-soft: #28362C;
+  --border-strong: #3A4D3F;
+
+  --accent: #5DCAA5;
+  --accent-dim: #2E6E58;
+  --accent-bright: #8BE6C4;
+
+  --coral: #D85A30;
+  --coral-dim: #7A3520;
+  --amber: #E8A23B;
+  --purple: #9D8FE8;
+
+  --text-primary: #E8EDE9;
+  --text-secondary: #9BAA9F;
+  --text-muted: #66766B;
+
+  --font-ui: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(93, 202, 165, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 85% 90%, rgba(216, 90, 48, 0.04) 0%, transparent 45%);
+  min-height: 100vh;
+}
+
+.app-shell {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+/* ------------------------------------------
+   ENCABEZADO
+   ------------------------------------------ */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.app-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-dim), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 16px;
+  color: #06140F;
+  flex-shrink: 0;
+}
+
+.app-header h1 {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.app-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 2px 0 0;
+}
+
+.status-bar {
+  display: flex;
+  gap: 18px;
+  margin: 18px 0 36px;
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.status-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background: var(--bg-panel-raised);
+  color: var(--text-muted);
+}
+.status-pill.ok { background: rgba(93, 202, 165, 0.12); color: var(--accent-bright); }
+
+/* ------------------------------------------
+   PANTALLA DE BIENVENIDA
+   ------------------------------------------ */
+
+.intro-block {
+  margin-bottom: 36px;
+}
+
+.intro-block h2 {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0 0 14px;
+  max-width: 680px;
+}
+
+.intro-block p {
+  font-size: 15.5px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 0 0;
+}
+
+.intro-block .quien-ayuda {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: var(--bg-panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ------------------------------------------
+   CARGA DE DATOS (compacta, discreta)
+   ------------------------------------------ */
+
+.carga-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.carga-card .carga-texto p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+.carga-card .carga-texto strong { color: var(--text-primary); }
+
+/* ------------------------------------------
+   TARJETAS DE PREGUNTA (entrada principal)
+   ------------------------------------------ */
+
+.preguntas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pregunta-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 24px 22px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pregunta-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+.pregunta-card .pregunta-icono {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--bg-panel-raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.pregunta-card h3 {
+  font-size: 16.5px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.pregunta-card p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------
+   PANTALLAS DE RESPUESTA
+   ------------------------------------------ */
+
+.vista-pregunta { display: none; }
+.vista-pregunta.active { display: block; animation: fadeIn 0.2s ease; }
+
+.volver-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.volver-btn:hover { color: var(--text-primary); }
+
+.pregunta-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.pregunta-header p {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 0 24px;
+}
+
+/* ------------------------------------------
+   CONTROLES DE FORMULARIO
+   ------------------------------------------ */
+
+.form-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+}
+
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.control-group label {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+select, input[type="text"], input[type="number"] {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 14.5px;
+  font-family: var(--font-ui);
+  width: 100%;
+}
+
+select:focus, input:focus { outline: none; border-color: var(--accent); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+
+.btn {
+  background: var(--accent);
+  color: #06140F;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 11px 22px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn.secondary {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+}
+.btn.secondary:hover { background: var(--bg-panel-raised); }
+
+/* ------------------------------------------
+   RESPUESTA EN LENGUAJE NATURAL
+   ------------------------------------------ */
+
+.respuesta-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+
+.respuesta-card p {
+  font-size: 15px;
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+.respuesta-card p:last-child { margin-bottom: 0; }
+
+.respuesta-card.alerta { border-left-color: var(--amber); }
+.respuesta-card.vacia { border-left-color: var(--text-muted); }
+
+/* ------------------------------------------
+   TARJETAS DE PROTEÍNA (ranking, equipos)
+   ------------------------------------------ */
+
+.proteina-card {
+  background: var(--bg-panel-raised);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.proteina-rank {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  min-width: 28px;
+  padding-top: 2px;
+}
+
+.proteina-nombre {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-bright);
+  margin: 0 0 4px;
+}
+
+.proteina-explicacion {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.proteina-badges {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--bg-panel);
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+}
+.badge.activo { background: rgba(93, 202, 165, 0.12); color: var(--accent-bright); border-color: var(--accent-dim); }
+
+/* ------------------------------------------
+   EQUIPOS DE PROTEÍNAS
+   ------------------------------------------ */
+
+.equipo-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+.equipo-card:hover { border-color: var(--accent-dim); }
+
+.equipo-nombre {
+  font-size: 15.5px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.equipo-meta {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.equipo-miembros {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--accent-bright);
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+/* ------------------------------------------
+   GRAFOS
+   ------------------------------------------ */
+
+.graph-container {
+  background: var(--bg-base);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  margin-top: 16px;
+}
+.graph-container svg { display: block; width: 100%; height: auto; }
+
+/* ------------------------------------------
+   ESTADOS
+   ------------------------------------------ */
+
+.loading-state, .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  color: var(--text-muted);
+  text-align: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 22px; height: 22px;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+.error-banner {
+  background: rgba(216, 90, 48, 0.1);
+  border: 1px solid rgba(216, 90, 48, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-size: 13.5px;
+  color: #F0997B;
+  margin: 14px 0;
+}
+
+.mono { font-family: var(--font-mono); }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--accent-bright); }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+@media (max-width: 700px) {
+  .app-shell { padding: 20px 16px 60px; }
+  .intro-block h2 { font-size: 21px; }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Qué proteína deberíamos estudiar primero? — Análisis de redes biológicas</title>
+<link rel="stylesheet" href="css/styles-v2.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <header class="app-header">
+    <div class="app-mark">AB</div>
+    <div>
+      <h1>Análisis de redes biológicas</h1>
+      <p>Apoyo a la decisión de qué proteínas investigar primero</p>
+    </div>
+  </header>
+
+  <div class="status-bar">
+    <span class="status-pill" id="status-red">red: sin cargar</span>
+    <span class="status-pill" id="status-seq">secuencias: sin cargar</span>
+  </div>
+
+  <!-- ============ PANTALLA DE INICIO ============ -->
+  <section id="vista-inicio">
+
+    <div class="intro-block">
+      <h2>¿Qué proteína deberíamos investigar primero?</h2>
+      <p>
+        Validar una proteína en laboratorio cuesta tiempo y dinero. Esta herramienta analiza
+        una red de 1500 proteínas humanas y sus secuencias reales para ayudar a decidir
+        dónde enfocar ese esfuerzo limitado, en lugar de elegir al azar entre miles de candidatas.
+      </p>
+      <div class="quien-ayuda">
+        Pensada para investigadores y equipos de laboratorio con tiempo y presupuesto
+        acotado, y como herramienta de apoyo para estudiantes de bioinformática.
+      </div>
+    </div>
+
+    <div class="carga-card" id="carga-card">
+      <div class="carga-texto">
+        <p><strong>Antes de empezar:</strong> cargue la red de proteínas y sus secuencias.</p>
+        <p>Incluye datos de ejemplo: 1500 proteínas humanas y sus secuencias reales.</p>
+      </div>
+      <button class="btn" id="btn-carga-automatica">Cargar datos de ejemplo</button>
+    </div>
+
+    <div class="preguntas-grid">
+      <div class="pregunta-card" data-vista="vista-ranking">
+        <div class="pregunta-icono">①</div>
+        <h3>¿Qué proteínas debería priorizar?</h3>
+        <p>Obtenga una lista corta de candidatas, con la razón por la que cada una destaca.</p>
+      </div>
+
+      <div class="pregunta-card" data-vista="vista-relacion">
+        <div class="pregunta-icono">②</div>
+        <h3>¿Estas dos proteínas están relacionadas?</h3>
+        <p>Consulte si dos proteínas específicas están conectadas y qué tan fuerte es esa relación.</p>
+      </div>
+
+      <div class="pregunta-card" data-vista="vista-equipos">
+        <div class="pregunta-icono">③</div>
+        <h3>¿Qué grupos trabajan juntos?</h3>
+        <p>Descubra comunidades de proteínas que actúan como un equipo dentro de la célula.</p>
+      </div>
+
+      <div class="pregunta-card" data-vista="vista-profundo">
+        <div class="pregunta-icono">④</div>
+        <h3>¿Qué tan parecidas son, y qué hay alrededor de una de ellas?</h3>
+        <p>Compare dos proteínas con cuatro métodos de análisis de secuencia, y explore el vecindario de una proteína específica.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Las vistas de respuesta se inyectan aquí -->
+  <div id="vistas-preguntas"></div>
+
+</div>
+
+<script src="js/data-loader.js"></script>
+<script src="js/graph-renderer.js"></script>
+<script src="js/algorithms/dfs.js"></script>
+<script src="js/algorithms/scc.js"></script>
+<script src="js/algorithms/ufds.js"></script>
+<script src="js/algorithms/mst.js"></script>
+<script src="js/algorithms/flujo-maximo.js"></script>
+<script src="js/algorithms/dp-grafo.js"></script>
+<script src="js/algorithms/divide-venceras-red.js"></script>
+<script src="js/algorithms/fuerza-bruta.js"></script>
+<script src="js/algorithms/dp-needleman-wunsch.js"></script>
+<script src="js/algorithms/voraz.js"></script>
+<script src="js/algorithms/backtracking.js"></script>
+<script src="js/algorithms/divide-venceras-secuencia.js"></script>
+<script src="js/algorithms/integracion.js"></script>
+<script src="js/algorithms/relacion-proteinas.js"></script>
+<script src="js/algorithms/equipos-proteinas.js"></script>
+<script src="js/lenguaje-natural.js"></script>
+<script src="js/vistas-preguntas.js"></script>
+<script src="js/app-v2.js"></script>
+</body>
+</html>
