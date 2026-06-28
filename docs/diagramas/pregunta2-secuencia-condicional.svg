@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 680 480" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Por qué la Pregunta 2 usa 3 algoritmos en secuencia condicional</title>
+<desc>Diagrama de flujo que muestra cómo la pregunta sobre relación entre dos proteínas ejecuta primero una lectura simple de conexión directa, y según el resultado activa DP en grafos (si no hay conexión directa), luego flujo máximo (si hay algún tipo de conexión), y siempre fuerza bruta al final para comparar secuencias.</desc>
+<rect x="220" y="20" width="240" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="340" y="40" text-anchor="middle" font-size="14" font-weight="500" fill="#2C2C2A">¿Conexión directa?</text>
+<text x="340" y="58" text-anchor="middle" font-size="12" fill="#444441">Lectura simple, sin algoritmo</text>
+
+<line x1="270" y1="76" x2="180" y2="120" stroke="#888780" stroke-width="1"/>
+<line x1="410" y1="76" x2="500" y2="120" stroke="#888780" stroke-width="1"/>
+<text x="170" y="100" text-anchor="middle" font-size="12" fill="#5F5E5A">No</text>
+<text x="510" y="100" text-anchor="middle" font-size="12" fill="#5F5E5A">Sí</text>
+
+<rect x="70" y="120" width="220" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="180" y="140" text-anchor="middle" font-size="14" font-weight="500" fill="#04342C">DP en grafos</text>
+<text x="180" y="158" text-anchor="middle" font-size="12" fill="#085041">Busca la ruta más confiable</text>
+
+<rect x="400" y="120" width="220" height="40" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="510" y="140" text-anchor="middle" font-size="14" fill="#4A1B0C">Ya hay un tipo de conexión</text>
+
+<line x1="180" y1="176" x2="400" y2="220" stroke="#888780" stroke-width="1"/>
+<line x1="510" y1="160" x2="450" y2="220" stroke="#888780" stroke-width="1"/>
+<line x1="180" y1="176" x2="180" y2="320" stroke="#888780" stroke-width="1"/>
+
+<rect x="280" y="220" width="240" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="400" y="240" text-anchor="middle" font-size="14" font-weight="500" fill="#04342C">Flujo máximo</text>
+<text x="400" y="258" text-anchor="middle" font-size="12" fill="#085041">¿Cuántas rutas alternativas hay?</text>
+
+<line x1="400" y1="276" x2="280" y2="320" stroke="#888780" stroke-width="1"/>
+
+<rect x="160" y="320" width="240" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="280" y="340" text-anchor="middle" font-size="14" font-weight="500" fill="#26215C">Fuerza bruta</text>
+<text x="280" y="358" text-anchor="middle" font-size="12" fill="#3C3489">Compara secuencia real (siempre)</text>
+
+<line x1="280" y1="376" x2="280" y2="406" stroke="#888780" stroke-width="1"/>
+
+<rect x="100" y="406" width="360" height="50" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="280" y="431" text-anchor="middle" font-size="14" fill="#412402">Respuesta en una sola narración</text>
+
+<text x="40" y="478" font-size="12" fill="#5F5E5A">Cada algoritmo se activa según lo que devolvió el anterior, no los 3 a la vez.</text>
+</svg>

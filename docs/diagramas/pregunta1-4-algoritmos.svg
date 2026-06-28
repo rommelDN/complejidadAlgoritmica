@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 680 520" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Por qué la Pregunta 1 usa 4 algoritmos</title>
+<desc>Diagrama estructural que muestra cómo tres algoritmos (grado, SCC+UFDS, MST) actúan como tres votos independientes para decidir si una proteína es prioritaria, exigiendo al menos 2 de 3 votos a favor, y un cuarto algoritmo (fuerza bruta) que se usa después, de forma opcional, solo para dar evidencia de secuencia sobre una proteína ya elegida.</desc>
+<rect x="40" y="20" width="600" height="320" rx="20" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="340" y="50" text-anchor="middle" font-size="14" font-weight="500" fill="#26215C">Pregunta 1: ¿qué proteína priorizar?</text>
+<text x="340" y="68" text-anchor="middle" font-size="12" fill="#3C3489">3 algoritmos votan, en paralelo, sobre la misma proteína</text>
+
+<rect x="70" y="100" width="160" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="150" y="120" text-anchor="middle" font-size="14" font-weight="500" fill="#04342C">Grado</text>
+<text x="150" y="140" text-anchor="middle" font-size="12" fill="#085041">¿Es un hub conectado?</text>
+
+<rect x="260" y="100" width="160" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="340" y="120" text-anchor="middle" font-size="14" font-weight="500" fill="#04342C">SCC + UFDS</text>
+<text x="340" y="140" text-anchor="middle" font-size="12" fill="#085041">¿Es un equipo específico?</text>
+
+<rect x="450" y="100" width="160" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="530" y="120" text-anchor="middle" font-size="14" font-weight="500" fill="#04342C">MST</text>
+<text x="530" y="140" text-anchor="middle" font-size="12" fill="#085041">¿Es esqueleto confiable?</text>
+
+<line x1="150" y1="156" x2="300" y2="220" stroke="#888780" stroke-width="1"/>
+<line x1="340" y1="156" x2="340" y2="220" stroke="#888780" stroke-width="1"/>
+<line x1="530" y1="156" x2="380" y2="220" stroke="#888780" stroke-width="1"/>
+
+<rect x="220" y="220" width="240" height="60" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="340" y="244" text-anchor="middle" font-size="14" font-weight="500" fill="#412402">Regla: al menos 2 de 3 votos</text>
+<text x="340" y="262" text-anchor="middle" font-size="12" fill="#633806">161 de 1500 proteínas pasan</text>
+
+<line x1="340" y1="280" x2="340" y2="310" stroke="#888780" stroke-width="1"/>
+
+<rect x="170" y="310" width="340" height="36" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="340" y="332" text-anchor="middle" font-size="14" fill="#4A1B0C">Lista priorizada con razón explicada</text>
+
+<line x1="430" y1="346" x2="500" y2="400" stroke="#888780" stroke-width="1"/>
+
+<rect x="390" y="400" width="220" height="56" rx="8" fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
+<text x="500" y="420" text-anchor="middle" font-size="14" font-weight="500" fill="#4B1528">Fuerza bruta (opcional)</text>
+<text x="500" y="438" text-anchor="middle" font-size="12" fill="#72243E">Evidencia de secuencia, después</text>
+
+<text x="40" y="485" font-size="12" fill="#5F5E5A">Los 3 algoritmos de arriba deciden si una proteína entra al ranking.</text>
+<text x="40" y="502" font-size="12" fill="#5F5E5A">El 4to (rosa) solo se activa si el usuario pide ver evidencia de secuencia de una ya elegida.</text>
+</svg>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 680 460" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Por qué la Pregunta 4 agrupa 5 algoritmos en 2 bloques independientes</title>
+<desc>Diagrama estructural que muestra los dos bloques de la cuarta pregunta: el bloque A compara dos secuencias con cuatro métodos distintos (fuerza bruta, divide y vencerás, voraz, y programación dinámica de Needleman-Wunsch, con backtracking como nota explicativa adicional), y el bloque B explora el vecindario de una proteína con DFS y muestra un dato de referencia calculado con divide y vencerás sobre la red. Los dos bloques no comparten datos entre sí.</desc>
+<rect x="30" y="20" width="300" height="280" rx="16" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="180" y="46" text-anchor="middle" font-size="14" font-weight="500" fill="#26215C">Bloque A</text>
+<text x="180" y="64" text-anchor="middle" font-size="12" fill="#3C3489">Comparar 2 secuencias, 4 formas</text>
+
+<rect x="50" y="80" width="260" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="180" y="102" text-anchor="middle" font-size="14" fill="#04342C">Fuerza bruta — comparación directa</text>
+
+<rect x="50" y="126" width="260" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="180" y="148" text-anchor="middle" font-size="14" fill="#04342C">Divide y vencerás — por bloques</text>
+
+<rect x="50" y="172" width="260" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="180" y="194" text-anchor="middle" font-size="14" fill="#04342C">Voraz — alineamiento rápido</text>
+
+<rect x="50" y="218" width="260" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="180" y="240" text-anchor="middle" font-size="14" fill="#04342C">DP Needleman-Wunsch — exacto</text>
+
+<line x1="180" y1="254" x2="180" y2="266" stroke="#888780" stroke-width="1"/>
+<rect x="50" y="266" width="260" height="26" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="180" y="282" text-anchor="middle" font-size="12" fill="#444441">+ Backtracking, como nota aparte</text>
+
+<rect x="350" y="20" width="300" height="280" rx="16" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="500" y="46" text-anchor="middle" font-size="14" font-weight="500" fill="#4A1B0C">Bloque B</text>
+<text x="500" y="64" text-anchor="middle" font-size="12" fill="#712B13">Explorar alrededor de una proteína</text>
+
+<rect x="370" y="90" width="260" height="56" rx="8" fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
+<text x="500" y="110" text-anchor="middle" font-size="14" font-weight="500" fill="#4B1528">DFS</text>
+<text x="500" y="128" text-anchor="middle" font-size="12" fill="#72243E">Vecindario más cercano</text>
+
+<rect x="370" y="160" width="260" height="56" rx="8" fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
+<text x="500" y="180" text-anchor="middle" font-size="14" font-weight="500" fill="#4B1528">Divide y vencerás (red)</text>
+<text x="500" y="198" text-anchor="middle" font-size="12" fill="#72243E">Dato de referencia: interacción máxima</text>
+
+<text x="500" y="250" text-anchor="middle" font-size="12" fill="#712B13">Sin relación entre ambos —</text>
+<text x="500" y="266" text-anchor="middle" font-size="12" fill="#712B13">DFS explora, D&amp;V solo informa un dato curioso</text>
+
+<text x="40" y="330" font-size="12" fill="#5F5E5A">Los dos bloques son independientes entre sí: el usuario elige una acción u otra, no ambas a la vez.</text>
+</svg>
